@@ -1,11 +1,21 @@
+
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
+import App from './components/App';
 import reportWebVitals from './reportWebVitals';
+import { Global, css } from '@emotion/react'
 
 ReactDOM.render(
   <React.StrictMode>
+    <Global
+      styles={css`
+        *{
+          margin: 0;
+          padding: 0;
+        
+        }
+        }
+      `}/>
     <App />
   </React.StrictMode>,
   document.getElementById('root')
