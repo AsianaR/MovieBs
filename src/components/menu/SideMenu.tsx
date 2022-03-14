@@ -6,17 +6,21 @@ import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
 import IconButton from "@mui/material/IconButton";
 import MenuIcon from '@mui/icons-material/Menu';
-import styled from '@emotion/styled'
+import Divider from '@mui/material/Divider'
 
 type Anchor = 'top' | 'left' | 'bottom' | 'right';
 const anchor = 'left';
-const menuItems = ['All mail', 'Trash', 'Spam'];
+const menuItems = [
+  'Action',
+  'Crime',
+  'Drama',
+  'Comedy',
+  'Horror',
+  'Sci-Fi',
+  'Fantasy',
+  'War Drama'];
 
 export default function SideMenu() {
-
-  const StyledSideMenu = styled.div`
-    
-  `;
 
 
   const [state, setState] = useState({
@@ -38,7 +42,6 @@ export default function SideMenu() {
   );
 
   return (
-    <StyledSideMenu>
         <Fragment key={anchor}>
           <IconButton onClick={() => setState({ ...state, left: true })}><MenuIcon style={{color: "#c9cacc"}}/></IconButton>
           <SwipeableDrawer
@@ -47,9 +50,11 @@ export default function SideMenu() {
             onClose={() => setState({ ...state, left: false })}
             onOpen={() => setState({ ...state, left: true })}
           >
+            
+
+            <Divider/>
             {list(anchor)}
           </SwipeableDrawer>
         </Fragment>
-    </StyledSideMenu>
   );
 }

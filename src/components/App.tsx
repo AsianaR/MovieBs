@@ -1,23 +1,18 @@
 import React, { useState } from 'react';
-import AppHeader from './AppHeader';
+import AppHeader from './appHeader/AppHeader';
 import SearchAppBar from "./menu/TopMenu";
-import MovieCard from './MovieCard';
+import Content from './Content/Content';
 
 
 function App() {
   const [card, setCard]= useState([]);
   
-  setInterval(() => {
-    console.log(card);       
-    setCard([...card,<MovieCard/>]);
-  },5000)
-
   return (
     <div>
        <SearchAppBar/>
        <AppHeader/>
-       
-         {card}
+
+        <Content/>
          
     </div>
   );
