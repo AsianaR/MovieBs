@@ -1,12 +1,14 @@
-import { useState, Fragment } from 'react';
+import { useState, Fragment, useEffect } from 'react';
 import Box from '@mui/material/Box';
 import SwipeableDrawer from '@mui/material/SwipeableDrawer';
+import genreService from '../../services/GenreService';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
 import IconButton from "@mui/material/IconButton";
 import MenuIcon from '@mui/icons-material/Menu';
-import Divider from '@mui/material/Divider'
+import Divider from '@mui/material/Divider';
+
 
 type Anchor = 'top' | 'left' | 'bottom' | 'right';
 const anchor = 'left';
@@ -21,7 +23,15 @@ const menuItems = [
   'War Drama'];
 
 export default function SideMenu() {
+  const [data, setData] = useState();
 
+  useEffect(() => {
+    const request = async (MovieId: String) => {
+      const data = await genreService.getData();
+      setData(data.genres);
+    };
+    request();
+  }, []);
 
   const [state, setState] = useState({
     left: false
@@ -33,6 +43,7 @@ export default function SideMenu() {
     > 
       <List>
         {menuItems.map((text, index) => (
+          console.log(text);
           <ListItem button key={text}>
             <ListItemText primary={text} />
           </ListItem>

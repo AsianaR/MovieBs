@@ -1,14 +1,4 @@
 class MovieService{
-
-    // type Data = {
-    //     title : String,
-    //     overview : String,
-    //     vote_average : Number,
-    //     imdb_id : String,
-    //     poster_path : String
-
-    // };
-
     _apiKey = '09c952b67461e6f2b3f9a1193cfe48a8';
 
     getResource = async (url : string) => {

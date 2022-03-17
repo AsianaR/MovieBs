@@ -15,7 +15,7 @@ ReactDOM.render(
         }
 
         body{
-          background-color: #363525;
+          background-color:  #2C3539;
         }
         }
       `}/>

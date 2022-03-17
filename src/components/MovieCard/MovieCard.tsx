@@ -19,7 +19,6 @@ export default function MovieCard(props: any) {
     request(MovieId);
   }, []);
 
-  console.log(data);
 
   return (
       <Card sx={{ width: "calc(18vw)", marginTop: "25px" }}>
@@ -31,7 +30,7 @@ export default function MovieCard(props: any) {
           />
         </CardActionArea>
       <CardContent>
-        <Typography color={"red"}>{data?.title}</Typography>
+        <Typography>{data?.title}</Typography>
       </CardContent>
       </Card>
   );

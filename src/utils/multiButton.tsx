@@ -6,7 +6,7 @@ import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 
 const MultiButton = () => {
     const ButtonWrapper = styled.div`
-    justify-content: flex-start;
+    justify-content: space-evenly;
     display: flex;
     margin-top: 10px;
     width: 100%;
