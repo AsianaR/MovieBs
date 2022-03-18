@@ -22,7 +22,11 @@ const SearchWrapper = styled.div`
 
 export default function SearchAppBar() {
   return (
-    <Box sx={{ flexGrow: 1 }}>
+    <Box sx={{ flexGrow: 1,     
+      position: "fixed",
+      zIndex: 99,
+      width:"100%",
+      top: 0}}>
       <AppBar position="static">
         <Toolbar>
           <SideMenu />

@@ -11,8 +11,11 @@ ReactDOM.render(
       styles={css`
         *{
           margin: 0;
-          padding: 0;
-        
+          padding: 0; 
+        }
+
+        body{
+          background-color:  #2C3539;
         }
         }
       `}/>

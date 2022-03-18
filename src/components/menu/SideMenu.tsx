@@ -1,23 +1,29 @@
-import { useState, Fragment } from 'react';
+import { useState, Fragment, useEffect } from 'react';
 import Box from '@mui/material/Box';
 import SwipeableDrawer from '@mui/material/SwipeableDrawer';
+import genreService from '../../services/GenreService';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
 import IconButton from "@mui/material/IconButton";
 import MenuIcon from '@mui/icons-material/Menu';
-import styled from '@emotion/styled'
+import Divider from '@mui/material/Divider';
+
 
 type Anchor = 'top' | 'left' | 'bottom' | 'right';
 const anchor = 'left';
-const menuItems = ['All mail', 'Trash', 'Spam'];
+
 
 export default function SideMenu() {
+  const [data, setData] = useState();
 
-  const StyledSideMenu = styled.div`
-    
-  `;
-
+  useEffect(() => {
+    const request = async () => {
+      const data = await genreService.getData();
+      setData(data.genres);
+    };
+    request();
+  }, []);
 
   const [state, setState] = useState({
     left: false
@@ -28,9 +34,10 @@ export default function SideMenu() {
         sx={{minWidth: 220}}
     > 
       <List>
-        {menuItems.map((text, index) => (
-          <ListItem button key={text}>
-            <ListItemText primary={text} />
+        {data.map((text, index) => (
+          <ListItem button key={text.name}>
+            {console.log(text.name)}
+            <ListItemText primary={text.name} />
           </ListItem>
         ))}
       </List>
@@ -38,7 +45,6 @@ export default function SideMenu() {
   );
 
   return (
-    <StyledSideMenu>
         <Fragment key={anchor}>
           <IconButton onClick={() => setState({ ...state, left: true })}><MenuIcon style={{color: "#c9cacc"}}/></IconButton>
           <SwipeableDrawer
@@ -47,9 +53,11 @@ export default function SideMenu() {
             onClose={() => setState({ ...state, left: false })}
             onOpen={() => setState({ ...state, left: true })}
           >
+            
+
+            <Divider/>
             {list(anchor)}
           </SwipeableDrawer>
         </Fragment>
-    </StyledSideMenu>
   );
 }
