@@ -25,7 +25,7 @@ export default function SideMenu() {
 
   const list = (anchor) => (
     <Box
-        sx={{minWidth: 220}}
+        sx={{minWidth: 220, color: "#000"}}
     > 
       <List>
         {data?.genres.map(text => (

@@ -17,8 +17,8 @@ const useMovieService = () => {
   };
 
   const getMovieById = async (id) => {
-    const res = await request(`${_apiBase}movie/${id}?api_key=${this._apiKey}`);
-    return res;
+    const res = await request(`${_apiBase}movie/${id}?${_apiKey}`);
+    return _transformData(res);
   };
   
   const _transformData = (data) => {
@@ -26,7 +26,7 @@ const useMovieService = () => {
       title: data.title,
       description: data.overview,
       rate: data.vote_average,
-      id: data.imdb_id,
+      id: data.id,
       poster: "http://image.tmdb.org/t/p/w342/" + data.poster_path,
     };
   };

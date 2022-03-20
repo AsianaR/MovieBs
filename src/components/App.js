@@ -1,17 +1,18 @@
-import React, { useState } from "react";
-import AppHeader from "./appHeader/AppHeader";
-import SearchAppBar from "./menu/TopMenu";
-import Content from "./content/Content";
+import {BrowserRouter, Routes, Route } from "react-router-dom";
+import MainPage from "./pages/MainPage";
+import MoviePage from "./pages/MoviePage"
+import NotFound from "./pages/404"
+
 
 function App() {
-  const [card, setCard] = useState([]);
-
   return (
-    <div>
-      <SearchAppBar />
-      <AppHeader />
-      <Content />
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route  path="/movies" element={<MainPage/>}/>
+        <Route  path="/movies/:movieId" element={<MoviePage/>}/>
+        <Route path="*" element={<NotFound/>}/>
+      </Routes>
+    </BrowserRouter>
   );
 }
 
