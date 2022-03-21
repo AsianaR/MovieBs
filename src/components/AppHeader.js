@@ -4,10 +4,11 @@ import useMovieService from "../services/MovieService";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import IconButton from "@mui/material/Button";
+import { CircularProgress } from "@mui/material";
 import PlayArrowIcon from "@mui/icons-material/PlayArrow";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 
-export default function AppHeader() {
+const AppHeader = () => {
   const { loading, error, getMovieById } = useMovieService();
   const MovieId = Math.random() * (996 - 100) + 100;
   const [data, setData] = useState();
@@ -15,6 +16,10 @@ export default function AppHeader() {
   useEffect(() => {
     getMovieById(MovieId).then((value) => setData(value));
   }, []);
+
+  const errorMessage = error ? <Typography textAlign={"center"} variant="h4" color="error">ERROR!<br/> SOMETHING WENT WRONG</Typography> : null;
+  const spinner = loading ? <CircularProgress color="secondary" /> : null;
+  const content = !loading && !error ? <View data={data} /> : null;
 
   return (
     <Box
@@ -27,6 +32,18 @@ export default function AppHeader() {
         padding: "120px 50px 60px 50px",
       }}
     >
+    
+    {errorMessage}
+    {spinner}
+    {content}
+    
+    </Box>
+  );
+}
+
+const View = ({data}) => {
+  return(
+    <>
       <Box
         component="img"
         sx={{ height: "200px", mt: "5px" }}
@@ -57,6 +74,9 @@ export default function AppHeader() {
           </Link>
         </Box>
       </Box>
-    </Box>
-  );
+  </>
+  )
 }
+
+
+export default AppHeader;

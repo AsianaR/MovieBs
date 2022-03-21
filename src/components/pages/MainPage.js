@@ -1,6 +1,6 @@
 import AppHeader from "../AppHeader";
 import SearchAppBar from "../menu/TopMenu";
-import Content from "../Content";
+import TrendMovies from "../TrendMovies";
 import AppFooter from "../AppFooter";
 
 const MainPage = () => {
@@ -8,7 +8,7 @@ const MainPage = () => {
     <>
       <SearchAppBar />
       <AppHeader />
-      <Content />
+      <TrendMovies />
       <AppFooter />
     </>
   );

@@ -8,6 +8,7 @@ import ListItemText from "@mui/material/ListItemText";
 import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
 import Divider from "@mui/material/Divider";
+import { Link } from "react-router-dom";
 
 const anchor = "left";
 
@@ -30,7 +31,9 @@ export default function SideMenu() {
       <List>
         {data?.genres.map(text => (
           <ListItem button key={text?.name}>
+            <Link to={`/${text?.id}/${text?.name}`}>
             <ListItemText primary={text?.name} />
+            </Link>
           </ListItem>
         ))}
       </List>
