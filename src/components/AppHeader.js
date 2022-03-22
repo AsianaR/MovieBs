@@ -67,7 +67,7 @@ const View = ({data}) => {
           <IconButton>
             <FavoriteBorderIcon style={{ fontSize: "2rem" }} />
           </IconButton>
-          <Link to={`/movies/${data?.id}`}>
+          <Link to={`/movies/${data?.id}`} style={{textDecoration: "none", color: "#fff"}}>
             <IconButton>
               <PlayArrowIcon style={{ fontSize: "2.5rem" }} />
             </IconButton>

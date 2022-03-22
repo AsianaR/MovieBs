@@ -24,7 +24,8 @@ const theme = createTheme({
     },
     background: {
       paper: '#4484CE',
-    }
+    },
+    divider: '#ffffff',
   },
 });
 

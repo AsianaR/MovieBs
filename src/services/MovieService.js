@@ -60,7 +60,7 @@ const useMovieService = () => {
     return {
       username: data.author_details.username,
       avatar: data.author_details.avatar_path,
-      content: data.conntent
+      content: data.content
     };
   };
 

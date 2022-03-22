@@ -21,7 +21,7 @@ export default function TrendMovies() {
   function renderItems(arr) {
     const items = arr.map((item, index) => {
       return (
-        <Link to={`/movies/${item?.id}`}>
+        <Link to={`/movies/${item?.id}`} style={{textDecoration: "none", color: "#fff"}}>
           <Card
             key={index}
             sx={{ width: "300px", marginTop: "25px", textAlign: "center" }}
@@ -39,10 +39,6 @@ export default function TrendMovies() {
 
     return (
       <>
-        <Box sx={{ mt: "30px", ml: "30px" }}>
-          <Link to={"/"}>Main</Link>
-        </Box>
-
         <Box
           sx={{
             display: "flex",

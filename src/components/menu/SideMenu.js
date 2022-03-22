@@ -31,7 +31,7 @@ export default function SideMenu() {
       <List>
         {data?.genres.map(text => (
           <ListItem button key={text?.name}>
-            <Link to={`/${text?.id}/${text?.name}`}>
+            <Link to={`/${text?.id}/${text?.name}`} style={{textDecoration: "none", color: "#fff"}}>
             <ListItemText primary={text?.name} />
             </Link>
           </ListItem>

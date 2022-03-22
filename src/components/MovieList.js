@@ -21,14 +21,15 @@ export default function MoviesList() {
   }, []);
 
   const request = () => {
-    getMoviesByGenre(genreId).then((values) => setData(values));
+    getMoviesByGenre(genreId, pageNumber).then((values) => setData([...data, ...values]));
     setPageNumber(pageNumber + 1);
   };
 
   function renderItems(arr) {
+
     const items = arr.map((item, index) => {
       return (
-        <Link to={`/movies/${item?.id}`}>
+        <Link to={`/movies/${item?.id}`} style={{textDecoration: "none", color: "#fff"}}>
           <Card
             key={index}
             sx={{ width: "300px", marginTop: "25px", textAlign: "center" }}
@@ -37,7 +38,7 @@ export default function MoviesList() {
               <CardMedia component="img" image={item?.poster} alt="poster" />
             </CardActionArea>
             <CardContent>
-              <Typography color={"#000"}>{item?.title}</Typography>
+              <Typography color={"#fff"}>{item?.title}</Typography>
             </CardContent>
           </Card>
         </Link>
@@ -47,8 +48,8 @@ export default function MoviesList() {
     return (
       <>
       <Breadcrumbs sx={{display: "block", position: "absolute", top: "100px", left: "30px", color: "#000" }} aria-label="breadcrumb" separator="›">
-      <Link to={"/"}>Main</Link>
-      <Link to={`/${genreId}/${genreName}`}>{genreName}</Link>    
+      <Link to={"/"} style={{textDecoration: "none", color: "#000"}}>Main</Link>
+      <Link to={`/${genreId}/${genreName}`} style={{textDecoration: "none", color: "#000"}}>{genreName}</Link>    
     </Breadcrumbs>
         <Box
           sx={{
