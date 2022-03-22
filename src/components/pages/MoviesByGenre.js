@@ -1,12 +1,15 @@
 import SearchAppBar from "../menu/TopMenu";
 import AppFooter from "../AppFooter";
-import MovieList from "../MovieList"
+import MoviesList from "../MoviesList"
+import RandomMovie from "../RandomMovie";
+
 
 const MoviesByGenre = () => {
   return (
     <>
       <SearchAppBar />
-      <MovieList />
+      <RandomMovie/>
+      <MoviesList action={"GET_MOVIE_BY_GENRE"}/>
       <AppFooter />
     </>
   );

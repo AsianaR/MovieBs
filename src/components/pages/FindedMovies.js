@@ -2,16 +2,18 @@ import RandomMovie from "../RandomMovie";
 import SearchAppBar from "../menu/TopMenu";
 import MoviesList from "../MoviesList";
 import AppFooter from "../AppFooter";
+import {useParams} from "react-router-dom";
 
-const MainPage = () => {
+const FindedMovies = () => {
+  const {searchRequest} = useParams();
   return (
     <>
       <SearchAppBar />
       <RandomMovie />
-      <MoviesList action={"GET_TRENDS"}/>
+      <MoviesList action={"SEARCH"} payload={searchRequest}/>
       <AppFooter />
     </>
   );
 };
 
-export default MainPage;
+export default  FindedMovies;

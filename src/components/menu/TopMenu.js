@@ -7,8 +7,11 @@ import Typography from "@mui/material/Typography";
 import SearchIcon from "@mui/icons-material/Search";
 import useMovieService from "../../services/MovieService";
 import Autocomplete from "@mui/material/Autocomplete";
-import TextField from "@mui/material/TextField"
-import { useEffect, useState} from "react";
+import TextField from "@mui/material/TextField";
+import IconButton from "@mui/material/IconButton";
+import { useEffect, useState } from "react";
+import MoviesList from "../MoviesList";
+import { Link, useNavigate } from "react-router-dom";
 
 const SearchWrapper = styled("div")(({ theme }) => ({
   position: "relative",
@@ -25,7 +28,8 @@ const SearchWrapper = styled("div")(({ theme }) => ({
   },
 }));
 
-const SearchIconWrapper = styled("div")(({ theme }) => ({
+const SearchIconWrapper = styled(IconButton)(({ theme }) => ({
+  color: "#fff",
   padding: theme.spacing(0, 2),
   height: "100%",
   position: "absolute",
@@ -54,51 +58,63 @@ const StyledAutocomplete = styled(Autocomplete)(({ theme }) => ({
 
 export default function SearchAppBar() {
   const { loading, error, Search } = useMovieService();
-  const [inputValue, setInputValue] = useState("A");  
+  const [inputValue, setInputValue] = useState("A");
   const [data, setData] = useState([]);
+  let navigate = useNavigate();
+
+  const handleEnterClick = (e) => {
+    if(e.code === "Enter"){
+      navigate(`/find/${inputValue}`); 
+      (navigate(0));
+    } 
+  };
 
   useEffect(() => {
-    Search(inputValue).then(results => setData(results))
-    
-  },[inputValue]);
+    Search(inputValue).then((results) => setData(results));
+  }, [inputValue]);
 
-  
   return (
-    <Box sx={{ flexGrow: 1, position: "fixed", width: "100%", zIndex: "999" }}>
-      <AppBar position="static">
-        <Toolbar>
-          <SideMenu />
-          <Typography
-            variant="h6"
-            noWrap
-            component="div"
-            sx={{ flexGrow: 1, display: { xs: "none", sm: "block" } }}
-          ></Typography>
-          <SearchWrapper>
-            <SearchIconWrapper>
-              <SearchIcon />
-            </SearchIconWrapper>
-            <StyledAutocomplete
-              freeSolo
-              onInputChange={e => setInputValue(e.target.value)}
-              id="free-solo-2-demo"
-              disableClearable
-              options={data?.map((option) => (option.title))}
+    <>
+      <Box
+        sx={{ flexGrow: 1, position: "fixed", width: "100%", zIndex: "999" }}
+      >
+        <AppBar position="static">
+          <Toolbar>
+            <SideMenu />
+            <Typography
+              variant="h6"
+              noWrap
+              component="div"
+              sx={{ flexGrow: 1, display: { xs: "none", sm: "block" } }}
+            ></Typography>
+            <SearchWrapper>
+              <SearchIconWrapper>
+                <SearchIcon />
+              </SearchIconWrapper>
+
+              <StyledAutocomplete
               
-              renderInput={(params) => (
-                <TextField color="secondary"
-                  {...params}
-                  
-                  InputProps={{
-                    ...params.InputProps,
-                    type: "search",
-                  }}
-                />
-              )}
-            />
-          </SearchWrapper>
-        </Toolbar>
-      </AppBar>
-    </Box>
+                freeSolo
+                onKeyDown={e =>  handleEnterClick(e)}
+                onInputChange={(e) => setInputValue(e.target.value)}
+                id="free-solo-2-demo"
+                disableClearable
+                options={data?.map((option) => option.title)}
+                renderInput={(params) => (
+                  <TextField
+                    color="secondary"
+                    {...params}
+                    InputProps={{
+                      ...params.InputProps,
+                      type: "search",
+                    }}
+                  />
+                )}
+              />
+            </SearchWrapper>
+          </Toolbar>
+        </AppBar>
+      </Box>
+    </>
   );
 }

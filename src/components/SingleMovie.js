@@ -1,12 +1,11 @@
 import useMovieService from "../services/MovieService";
-import { useParams } from "react-router-dom";
+import { useNavigate,useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { Button, CircularProgress } from "@mui/material";
 import Box from "@mui/system/Box";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import Rating from "@mui/material/Rating";
-import { useNavigate } from "react-router-dom";
 
 
 const SingleMovie = () => {
@@ -40,7 +39,7 @@ const View = ({ data}) => {
           component="img"
           sx={{ mt: "100px" }}
           alt="Movie poster"
-          src={data?.poster}
+          src={data?.poster != "http://image.tmdb.org/t/p/w342/null" ? data?.poster: "https://upload.wikimedia.org/wikipedia/commons/6/64/Poster_not_available.jpg"}
         />
 
         <Rating

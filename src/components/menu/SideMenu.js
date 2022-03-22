@@ -8,13 +8,14 @@ import ListItemText from "@mui/material/ListItemText";
 import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
 import Divider from "@mui/material/Divider";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const anchor = "left";
 
 export default function SideMenu() {
   const { loading, error, getGenres } = useMovieService();
   const [data, setData] = useState();
+  let navigate = useNavigate()
 
   useEffect(() => {
     getGenres().then((value) => setData(value));
@@ -24,16 +25,19 @@ export default function SideMenu() {
     left: false,
   });
 
+  const handleClick = (genreId, genreName) => {
+      navigate(`/${genreId}/${genreName}`); 
+      navigate(0);
+  }
+
   const list = (anchor) => (
     <Box
         sx={{minWidth: 220, color: "#000"}}
     > 
       <List>
         {data?.genres.map(text => (
-          <ListItem button key={text?.name}>
-            <Link to={`/${text?.id}/${text?.name}`} style={{textDecoration: "none", color: "#fff"}}>
-            <ListItemText primary={text?.name} />
-            </Link>
+          <ListItem button key={text?.id} onClick={() => handleClick(text?.id, text?.name)} sx={{color: "#fff"}} >
+            <ListItemText primary={text?.name}/>
           </ListItem>
         ))}
       </List>

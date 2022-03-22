@@ -2,6 +2,8 @@ import useMovieService from "../services/MovieService";
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import Box from "@mui/system/Box";
+import Container from "@mui/material/Container";
+import Grid from "@mui/material/Grid";
 import ReactReadMoreReadLess from "react-read-more-read-less";
 import Typography from "@mui/material/Typography";
 import Avatar from "@mui/material/Avatar";
@@ -20,7 +22,7 @@ const Reviews = () => {
   const length = data !== undefined ? data.length : null;
   const content = length ? <View data={data} /> : null;
 
-  return <Box>{content}</Box>;
+  return <Container>{content}</Container>;
 };
 
 const View = ({ data }) => {
@@ -33,11 +35,12 @@ const View = ({ data }) => {
 
       {data?.map((item) => {
         return (
-          <Box sx={{ display: "flex", width: "80%", mx: "auto", mt: "50px", border: "10px black"}}>
-            <Box sx={{ px:"30px", pt: "10px", border: 'primary.main', textAlign: 'center', alignItems: "center" }}>
-              <Avatar src={item?.avatar? item?.avatar.substring(1): null} />
+          <Grid container spacing={2} sx={{  width: "80%", mx: "auto", mt: "50px", border: "10px black"}}>
+            <Grid item xs={2} sx={{ px:"30px", pt: "10px", border: 'primary.main', textAlign: "center" }}>
+              <Avatar src={item?.avatar? item?.avatar.substring(1): null} sx={{mx: "auto"}}/>
               <Typography mt="10px">{item?.username}</Typography>
-            </Box>
+            </Grid>
+            <Grid item xs={10}>
             <Typography>
             <ReactReadMoreReadLess
               charLimit={200}
@@ -51,7 +54,8 @@ const View = ({ data }) => {
               {item?.content}
             </ReactReadMoreReadLess>
               </Typography>
-          </Box>
+              </Grid>
+          </Grid>
         );
       })}
     </>
